@@ -1,0 +1,33 @@
+Trabalho Entregavel 03:MDC maximo divisor.
+ps:Codigo feito para o Replit em python.
+
+from collections import Counter
+from math import isqrt
+def fatorar(numero):
+fatores = []
+divisor = 2
+while divisor <= isqrt(numero):
+while numero % divisor == 0:
+fatores.append(divisor)
+numero //= divisor
+divisor += 1
+if numero > 1:
+fatores.append(numero)
+return Counter(fatores)
+def mdc_e_fatores_comuns(a, b):
+fatores_a = fatorar(a)
+fatores_b = fatorar(b)
+fatores_comuns = fatores_a & fatores_b # interseção dos fatores com menores expoentes
+lista_fatores = []
+for fator, expoente in fatores_comuns.items():
+lista_fatores.extend([fator] * expoente)
+mdc = 1
+for fator in lista_fatores:
+mdc *= fator
+return lista_fatores, mdc
+# Exemplo de uso:
+a = 40
+b = 60
+fatores_comuns, mdc = mdc_e_fatores_comuns(a, b)
+print(f"Fatores que dividem simultaneamente {a} e {b}: {fatores_comuns}")
+print(f"MDC de {a} e {b}: {mdc}")
